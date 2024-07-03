@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,6 +21,10 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 /*Contexto de repositorios*/
+@EnableJpaRepositories(
+    entityManagerFactoryRef = "springEntityManagerFactory", transactionManagerRef = "springTransactionManager", basePackages = {
+        "com.appchoferes.nomina.repositories",
+})
 public class DataSourceConfig {
 
     @Autowired
@@ -50,18 +55,19 @@ public class DataSourceConfig {
         MultiRoutingDataSource routingDataSource = new MultiRoutingDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put("noedb", db1DataSource());
-        targetDataSources.put("tecmadb", db2DataSource());
+        targetDataSources.put("ctdb", db2DataSource());
         routingDataSource.setTargetDataSources(targetDataSources);
         routingDataSource.setDefaultTargetDataSource(db1DataSource());
         return routingDataSource;
     }
 
-    @Bean(name = "entityManagerFactory")
+    @Bean(name = "springEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.appchoferes.nomina.models");
-        
+        em.setPackagesToScan("com.appchoferes.nomina.models", "com.appchoferes.nomina.dtos");
+        //em.setPackagesToScan("com.appchoferes.nomina.models");
+
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
 
@@ -75,7 +81,7 @@ public class DataSourceConfig {
         return em;
     }
 
-    @Bean(name = "transactionManager")
+    @Bean(name = "springTransactionManager")
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());

@@ -1,4 +1,4 @@
-package models;
+package com.appchoferes.nomina.models;
 
 import org.hibernate.annotations.ValueGenerationType;
 

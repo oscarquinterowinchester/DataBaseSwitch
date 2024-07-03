@@ -1,18 +1,18 @@
-package controllers;
+package com.appchoferes.nomina.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import models.Usuario;
-import services.UsuarioService;
+import com.appchoferes.nomina.models.Usuario;
+import com.appchoferes.nomina.services.UsuarioService;
 
 import java.util.List;
 import java.util.Optional;
 
 
 @RestController 
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UsuarioController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class UsuarioController {
         return "Hola mundo: " + dbType;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Usuario> getAllUsuarios(@RequestParam String dbType) {
         return usuarioService.findAll(dbType);
     }
@@ -38,7 +38,7 @@ public class UsuarioController {
         return usuarioService.findById(id, dbType);
     }
 
-    @PostMapping
+    @PostMapping()
     public Usuario createUsuario(@RequestBody Usuario usuario, @RequestParam String dbType) {
         return usuarioService.save(usuario, dbType);
     }
