@@ -1,7 +1,10 @@
 package com.appchoferes.nomina.dtos;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Nomina {
@@ -10,10 +13,14 @@ public class Nomina {
     String route;
     String date;
     Integer payment;
-    Integer container;
+    String container;
     Integer truck;
     Integer amount;
     Integer status;
+
+
+    @Transient
+    ArrayList<Extras> extras;
 
     public Long getId() {
         return id;
@@ -39,10 +46,10 @@ public class Nomina {
     public void setPayment(Integer payment) {
         this.payment = payment;
     }
-    public Integer getContainer() {
+    public String getContainer() {
         return container;
     }
-    public void setContainer(Integer container) {
+    public void setContainer(String container) {
         this.container = container;
     }
     public Integer getTruck() {
@@ -63,6 +70,10 @@ public class Nomina {
     public void setStatus(Integer status) {
         this.status = status;
     }
-
-    
+    public ArrayList<Extras> getExtras() {
+        return extras;
+    }
+    public void setExtras( ArrayList<Extras> extras) {
+        this.extras = extras;
+    }
 }
