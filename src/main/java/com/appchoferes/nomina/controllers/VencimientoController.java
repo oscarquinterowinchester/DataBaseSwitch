@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/vencimiento")
 public class VencimientoController {
-
     @Autowired
     VencimientoService vencimientoService;
 
@@ -25,7 +24,4 @@ public class VencimientoController {
     public ArrayList<Vencimiento> getVencimientos(@RequestParam String choferId,@RequestParam String dbType){
         return vencimientoService.getVencimiento(choferId, dbType);
     }
-
-
-
 }
