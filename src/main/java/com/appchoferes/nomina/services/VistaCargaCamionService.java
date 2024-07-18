@@ -1,12 +1,16 @@
 package com.appchoferes.nomina.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.appchoferes.nomina.config.DatabaseContextHolder;
 import com.appchoferes.nomina.dtos.CamionCarga;
+import com.appchoferes.nomina.dtos.CargasDiesel;
 import com.appchoferes.nomina.dtos.VistaCargaCamion;
 import com.appchoferes.nomina.repositories.ICamionCargaRepository;
+import com.appchoferes.nomina.repositories.ICargasDieselRepository;
 import com.appchoferes.nomina.repositories.IProveedoresRepository;
 
 @Service
@@ -16,6 +20,8 @@ public class VistaCargaCamionService {
     ICamionCargaRepository camionCargaRepository;
     @Autowired
     IProveedoresRepository proveedoresRepository;
+    @Autowired
+    ICargasDieselRepository cargasDieselRepository;
 
     public VistaCargaCamion getVistaCargaCamion(String choferId, String dbType)
     {
@@ -31,9 +37,10 @@ public class VistaCargaCamionService {
         vistaCamionCarga.setNoEconomico(camionCarga.getNoEconomico());
         vistaCamionCarga.setTanqueActual(camionCarga.getTanqueActual());
 
+        List<CargasDiesel> cargasDiesel = cargasDieselRepository.getCargasDiesel(choferId);
+
+        vistaCamionCarga.setCargasDiesel(cargasDiesel);
         vistaCamionCarga.setProveedores(proveedoresRepository.getProveedoresCombustible());
-
-
         return vistaCamionCarga;
     }
 

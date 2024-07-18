@@ -10,8 +10,7 @@ public class VistaCargaCamion {
     Long camionId;
     String noEconomico;
     String tanqueActual;
-
-    
+    List<CargasDiesel> cargasDiesel;
     List<ProveedoresCombustible> proveedores;
     
     public Long getCamionId() {
@@ -37,6 +36,12 @@ public class VistaCargaCamion {
     }
     public void setProveedores(List<ProveedoresCombustible> proveedores) {
         this.proveedores = proveedores;
+    }
+    public List<CargasDiesel> getCargasDiesel() {
+        return cargasDiesel;
+    }
+    public void setCargasDiesel(List<CargasDiesel> cargasDiesel) {
+        this.cargasDiesel = cargasDiesel;
     }
 
     
