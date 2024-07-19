@@ -12,7 +12,21 @@ public class VistaCargaCamion {
     String tanqueActual;
     List<CargasDiesel> cargasDiesel;
     List<ProveedoresCombustible> proveedores;
+    List<TipoCombustible> tipoCombustibles;
+    List<MetodosPago> metodosPagos;
     
+    public List<TipoCombustible> getTipoCombustibles() {
+        return tipoCombustibles;
+    }
+    public void setTipoCombustibles(List<TipoCombustible> tipoCombustibles) {
+        this.tipoCombustibles = tipoCombustibles;
+    }
+    public List<MetodosPago> getMetodosPagos() {
+        return metodosPagos;
+    }
+    public void setMetodosPagos(List<MetodosPago> metodosPagos) {
+        this.metodosPagos = metodosPagos;
+    }
     public Long getCamionId() {
         return camionId;
     }

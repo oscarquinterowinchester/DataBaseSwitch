@@ -11,7 +11,9 @@ import com.appchoferes.nomina.dtos.CargasDiesel;
 import com.appchoferes.nomina.dtos.VistaCargaCamion;
 import com.appchoferes.nomina.repositories.ICamionCargaRepository;
 import com.appchoferes.nomina.repositories.ICargasDieselRepository;
+import com.appchoferes.nomina.repositories.IMetodosPagoRepository;
 import com.appchoferes.nomina.repositories.IProveedoresRepository;
+import com.appchoferes.nomina.repositories.ITiposCombustibleRepository;
 
 @Service
 public class VistaCargaCamionService {
@@ -22,6 +24,10 @@ public class VistaCargaCamionService {
     IProveedoresRepository proveedoresRepository;
     @Autowired
     ICargasDieselRepository cargasDieselRepository;
+    @Autowired
+    ITiposCombustibleRepository tiposCombustibleRepository;
+    @Autowired
+    IMetodosPagoRepository metodosPagoRepository;
 
     public VistaCargaCamion getVistaCargaCamion(String choferId, String dbType)
     {
@@ -41,8 +47,9 @@ public class VistaCargaCamionService {
 
         vistaCamionCarga.setCargasDiesel(cargasDiesel);
         vistaCamionCarga.setProveedores(proveedoresRepository.getProveedoresCombustible());
+        vistaCamionCarga.setMetodosPagos(metodosPagoRepository.getMetodosPago());
+        vistaCamionCarga.setTipoCombustibles(tiposCombustibleRepository.getTipoCombustible());
         return vistaCamionCarga;
     }
-
 
 }
