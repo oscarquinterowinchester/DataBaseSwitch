@@ -14,7 +14,23 @@ public class VistaCargaCamion {
     List<ProveedoresCombustible> proveedores;
     List<TipoCombustible> tipoCombustibles;
     List<MetodosPago> metodosPagos;
+    List<Pais> paises;
+    List<Estado> estados;
+    CajaCarga caja;
     
+    
+    public List<Pais> getPaises() {
+        return paises;
+    }
+    public void setPaises(List<Pais> paises) {
+        this.paises = paises;
+    }
+    public List<Estado> getEstados() {
+        return estados;
+    }
+    public void setEstados(List<Estado> estados) {
+        this.estados = estados;
+    }
     public List<TipoCombustible> getTipoCombustibles() {
         return tipoCombustibles;
     }
@@ -56,6 +72,12 @@ public class VistaCargaCamion {
     }
     public void setCargasDiesel(List<CargasDiesel> cargasDiesel) {
         this.cargasDiesel = cargasDiesel;
+    }
+    public CajaCarga getCaja() {
+        return caja;
+    }
+    public void setCaja(CajaCarga caja) {
+        this.caja = caja;
     }
 
     

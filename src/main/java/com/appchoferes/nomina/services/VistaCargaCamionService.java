@@ -9,9 +9,12 @@ import com.appchoferes.nomina.config.DatabaseContextHolder;
 import com.appchoferes.nomina.dtos.CamionCarga;
 import com.appchoferes.nomina.dtos.CargasDiesel;
 import com.appchoferes.nomina.dtos.VistaCargaCamion;
+import com.appchoferes.nomina.repositories.ICajaCargaRepository;
 import com.appchoferes.nomina.repositories.ICamionCargaRepository;
 import com.appchoferes.nomina.repositories.ICargasDieselRepository;
+import com.appchoferes.nomina.repositories.IEstadosRepository;
 import com.appchoferes.nomina.repositories.IMetodosPagoRepository;
+import com.appchoferes.nomina.repositories.IPaisesReporsitory;
 import com.appchoferes.nomina.repositories.IProveedoresRepository;
 import com.appchoferes.nomina.repositories.ITiposCombustibleRepository;
 
@@ -28,6 +31,12 @@ public class VistaCargaCamionService {
     ITiposCombustibleRepository tiposCombustibleRepository;
     @Autowired
     IMetodosPagoRepository metodosPagoRepository;
+    @Autowired
+    IPaisesReporsitory paisesReporsitory;
+    @Autowired
+    IEstadosRepository estadosRepository;
+    @Autowired
+    ICajaCargaRepository cajaCargaRepository;
 
     public VistaCargaCamion getVistaCargaCamion(String choferId, String dbType)
     {
@@ -49,6 +58,12 @@ public class VistaCargaCamionService {
         vistaCamionCarga.setProveedores(proveedoresRepository.getProveedoresCombustible());
         vistaCamionCarga.setMetodosPagos(metodosPagoRepository.getMetodosPago());
         vistaCamionCarga.setTipoCombustibles(tiposCombustibleRepository.getTipoCombustible());
+
+        vistaCamionCarga.setEstados(estadosRepository.getEstados());
+        vistaCamionCarga.setPaises(paisesReporsitory.getPaises());
+
+        vistaCamionCarga.setCaja(cajaCargaRepository.getCajaCarga(choferId));
+
         return vistaCamionCarga;
     }
 
