@@ -1,7 +1,8 @@
 package com.appchoferes.nomina.dtos;
 
 import java.sql.Date;
-
+import java.sql.Time;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,16 +29,17 @@ public class CargasDieselEntity {
     private Integer choferId;
 
     @Column(name = "Litros")
-    private Float litros;
+    private Double litros;
 
     @Column(name = "LitrosECM")
-    private Float litrosECM;
+    private Double litrosECM;
 
     @Column(name = "Fecha")
     private Date fecha;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "Hora")
-    private Date hora;
+    private Time hora;
 
     @Column(name = "FechayHora")
     private Date fechayHora;
@@ -64,7 +66,7 @@ public class CargasDieselEntity {
     private Integer facturaId;
 
     @Column(name = "CantidadActual")
-    private Float cantidadActual;
+    private Double cantidadActual;
 
     @Column(name = "MetodoPago")
     private Integer metodoPago;
@@ -82,16 +84,16 @@ public class CargasDieselEntity {
     private Double rendimientoRutas;
 
     @Column(name = "OdometroCarga")
-    private Float odometroCarga;
+    private Double odometroCarga;
 
     @Column(name = "OdometroECM")
-    private Float odometroECM;
+    private Double odometroECM;
 
     @Column(name = "RecorridoCarga")
-    private Float recorridoCarga;
+    private Double recorridoCarga;
 
     @Column(name = "RecorridoECM")
-    private Float recorridoECM;
+    private Double recorridoECM;
 
     @Column(name = "Sellos")
     private String sellos;
@@ -106,7 +108,7 @@ public class CargasDieselEntity {
     private String fotoSello2;
 
     @Column(name = "PrecioTotal")
-    private Float precioTotal;
+    private Double precioTotal;
 
     @Column(name = "MonedaCarga")
     private Integer monedaCarga;
@@ -130,10 +132,10 @@ public class CargasDieselEntity {
     private Boolean fromWS;
 
     @Column(name = "RecorridoRutas")
-    private Float recorridoRutas;
+    private Double recorridoRutas;
 
     @Column(name = "OdometroAjustado")
-    private Float odometroAjustado;
+    private Double odometroAjustado;
 
     @Column(name = "UsuarioAjuste")
     private Integer usuarioAjuste;
@@ -188,19 +190,19 @@ public class CargasDieselEntity {
         this.choferId = choferId;
     }
 
-    public Float getLitros() {
+    public Double getLitros() {
         return litros;
     }
 
-    public void setLitros(Float litros) {
+    public void setLitros(Double litros) {
         this.litros = litros;
     }
 
-    public Float getLitrosECM() {
+    public Double getLitrosECM() {
         return litrosECM;
     }
 
-    public void setLitrosECM(Float litrosECM) {
+    public void setLitrosECM(Double litrosECM) {
         this.litrosECM = litrosECM;
     }
 
@@ -212,11 +214,11 @@ public class CargasDieselEntity {
         this.fecha = fecha;
     }
 
-    public Date getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -284,11 +286,11 @@ public class CargasDieselEntity {
         this.facturaId = facturaId;
     }
 
-    public Float getCantidadActual() {
+    public Double getCantidadActual() {
         return cantidadActual;
     }
 
-    public void setCantidadActual(Float cantidadActual) {
+    public void setCantidadActual(Double cantidadActual) {
         this.cantidadActual = cantidadActual;
     }
 
@@ -332,35 +334,35 @@ public class CargasDieselEntity {
         this.rendimientoRutas = rendimientoRutas;
     }
 
-    public Float getOdometroCarga() {
+    public Double getOdometroCarga() {
         return odometroCarga;
     }
 
-    public void setOdometroCarga(Float odometroCarga) {
+    public void setOdometroCarga(Double odometroCarga) {
         this.odometroCarga = odometroCarga;
     }
 
-    public Float getOdometroECM() {
+    public Double getOdometroECM() {
         return odometroECM;
     }
 
-    public void setOdometroECM(Float odometroECM) {
+    public void setOdometroECM(Double odometroECM) {
         this.odometroECM = odometroECM;
     }
 
-    public Float getRecorridoCarga() {
+    public Double getRecorridoCarga() {
         return recorridoCarga;
     }
 
-    public void setRecorridoCarga(Float recorridoCarga) {
+    public void setRecorridoCarga(Double recorridoCarga) {
         this.recorridoCarga = recorridoCarga;
     }
 
-    public Float getRecorridoECM() {
+    public Double getRecorridoECM() {
         return recorridoECM;
     }
 
-    public void setRecorridoECM(Float recorridoECM) {
+    public void setRecorridoECM(Double recorridoECM) {
         this.recorridoECM = recorridoECM;
     }
 
@@ -396,11 +398,11 @@ public class CargasDieselEntity {
         this.fotoSello2 = fotoSello2;
     }
 
-    public Float getPrecioTotal() {
+    public Double getPrecioTotal() {
         return precioTotal;
     }
 
-    public void setPrecioTotal(Float precioTotal) {
+    public void setPrecioTotal(Double precioTotal) {
         this.precioTotal = precioTotal;
     }
 
@@ -460,19 +462,19 @@ public class CargasDieselEntity {
         this.fromWS = fromWS;
     }
 
-    public Float getRecorridoRutas() {
+    public Double getRecorridoRutas() {
         return recorridoRutas;
     }
 
-    public void setRecorridoRutas(Float recorridoRutas) {
+    public void setRecorridoRutas(Double recorridoRutas) {
         this.recorridoRutas = recorridoRutas;
     }
 
-    public Float getOdometroAjustado() {
+    public Double getOdometroAjustado() {
         return odometroAjustado;
     }
 
-    public void setOdometroAjustado(Float odometroAjustado) {
+    public void setOdometroAjustado(Double odometroAjustado) {
         this.odometroAjustado = odometroAjustado;
     }
 

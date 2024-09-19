@@ -1,12 +1,16 @@
 package com.appchoferes.nomina.controllers;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.function.EntityResponse;
+
 import com.appchoferes.nomina.dtos.CargasDiesel;
 import com.appchoferes.nomina.dtos.CargasDieselEntity;
 import com.appchoferes.nomina.dtos.MetodosPago;
@@ -21,17 +25,19 @@ import com.appchoferes.nomina.services.CamionCargaService;
 import com.appchoferes.nomina.services.CargaDieselService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
 
 @RestController
-@RequestMapping("/cargasDiesel")
+@RequestMapping("/cargasCombustible")
 public class CargasDieselController {
-
-    
 
    @Autowired
    CamionCargaService vistaCamionCargaService;
@@ -49,36 +55,35 @@ public class CargasDieselController {
    VistaCargaCamionService vistaCargaCamionService;
 
    @Autowired
-   CargaDieselService cargasDieselService2;
-
-    // @GetMapping("")
-    // public ArrayList<CargasDiesel> getCargasDiesel(@RequestParam String choferId,@RequestParam String dbType) {
-    //     return cargasDieselService.getCargasDiesel(choferId, dbType);
-    // }
+   CargaDieselService cargasDieselService;
 
    
-    
-   
-    @GetMapping("/vistaCargaCamion")
+    @GetMapping("/cargarVistaCombustible")
     public VistaCargaCamion getVistaCamion(@RequestParam String choferId,@RequestParam String dbType) {
-
+        // Toma la unidad del momento para el chofer.
         return vistaCargaCamionService.getVistaCargaCamion(choferId, dbType);
     }
 
-    @GetMapping("/carga")
-    public ArrayList<CargasDieselEntity> getMethodName(@RequestParam String choferId,@RequestParam String dbType) {
-        return cargasDieselService2.getCargaDieselEntity(choferId, dbType);
+    @GetMapping("/cargarPorId")
+    public CargasDieselEntity getCargaPorId(@RequestParam String cargaId,@RequestParam String dbType) {
+        return cargasDieselService.obtenerCargaPorId(cargaId, dbType);
     }
 
     @PostMapping("/insertarCarga")
-    public String postMethodName(@RequestBody CargasDieselEntity entity) {
-        //TODO: process POST request
-        
-        entity.setStatus(false);
-        entity.setSellos("SELLO 1");
-        cargasDieselService2.insertarCarga(entity, "noedb");
-        return "Ecstpo";
+    public ResponseEntity<String> insertarCarga(@RequestBody CargasDieselEntity entity,String dbType) {
+        // return ResponseEntity.ok("Insertado correctamente");
+        return cargasDieselService.procesarCarga(entity, dbType);
     }
+
+    @PatchMapping("/cargas/{cargaId}")
+    public ResponseEntity<String> actualizarCargaPorCampos(@PathVariable String cargaId,@RequestBody Map<String,Object> campos,@RequestParam String dbType) {
+        cargasDieselService.actualizarCargaPorCampos(cargaId,campos,dbType);
+        return ResponseEntity.ok("Actualizado correctamente");
+    }
+
+    
+
+    
     
     
     

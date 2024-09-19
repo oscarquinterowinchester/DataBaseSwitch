@@ -55,7 +55,7 @@ public class DataSourceConfig {
         MultiRoutingDataSource routingDataSource = new MultiRoutingDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put("noedb", db1DataSource());
-        targetDataSources.put("ctdb", db2DataSource());
+        targetDataSources.put("tecmadb", db2DataSource());
         routingDataSource.setTargetDataSources(targetDataSources);
         routingDataSource.setDefaultTargetDataSource(db1DataSource());
         return routingDataSource;
