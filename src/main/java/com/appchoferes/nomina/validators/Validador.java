@@ -3,6 +3,8 @@ package com.appchoferes.nomina.validators;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +23,6 @@ public class Validador {
         if (objetoNoEsValido(valorObjeto)) {
             return null;
         }
-    
         // Definir el formato esperado de la hora
         // SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
         // formatoHora.setLenient(false); // Desactivar la leniencia para una validación estricta
@@ -47,6 +48,22 @@ public class Validador {
         try{
             valorDate = formatoFecha.parse(valorObjeto.toString());
         }catch(ParseException e){
+            print("Error al formatear la fecha: " + e);
+        }
+        return valorDate;
+    }
+
+    public static LocalDate validarLocalDate(String valorObjeto)
+    {
+        LocalDate valorDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if(objetoNoEsValido(valorObjeto)){
+            return null;
+        }
+        try{
+            valorDate = LocalDate.parse(valorObjeto,formatter);
+
+        }catch(Exception e){
             print("Error al formatear la fecha: " + e);
         }
         return valorDate;

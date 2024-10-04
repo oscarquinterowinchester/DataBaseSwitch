@@ -71,14 +71,13 @@ public class CargasDieselController {
 
     @PostMapping("/insertarCarga")
     public ResponseEntity<String> insertarCarga(@RequestBody CargasDieselEntity entity,String dbType) {
-        // return ResponseEntity.ok("Insertado correctamente");
         return cargasDieselService.procesarCarga(entity, dbType);
     }
 
     @PatchMapping("/cargas/{cargaId}")
     public ResponseEntity<String> actualizarCargaPorCampos(@PathVariable String cargaId,@RequestBody Map<String,Object> campos,@RequestParam String dbType) {
-        cargasDieselService.actualizarCargaPorCampos(cargaId,campos,dbType);
-        return ResponseEntity.ok("Actualizado correctamente");
+        ResponseEntity<String> mensaje = cargasDieselService.actualizarCargaPorCampos(cargaId,campos,dbType);
+        return mensaje;
     }
 
     

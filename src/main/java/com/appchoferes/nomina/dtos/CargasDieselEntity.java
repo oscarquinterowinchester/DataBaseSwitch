@@ -2,6 +2,12 @@ package com.appchoferes.nomina.dtos;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
+import com.appchoferes.nomina.operaciones.Utils;
+import com.appchoferes.nomina.operaciones.UtilsCarga;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,15 +40,16 @@ public class CargasDieselEntity {
     @Column(name = "LitrosECM")
     private Double litrosECM;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "Fecha")
-    private Date fecha;
+    private LocalDate fecha;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "Hora")
     private Time hora;
 
     @Column(name = "FechayHora")
-    private Date fechayHora;
+    private ZonedDateTime fechayHora;
 
     @Column(name = "Folio")
     private String folio;
@@ -157,6 +164,15 @@ public class CargasDieselEntity {
 
     @Column(name = "esChofer")
     private Boolean esChofer;
+   
+    public void calcularRecorridoyRendimiento(String ultimoOdometro){
+        double recorrido = UtilsCarga.calcularRecorrido(this, ultimoOdometro);
+        this.setRecorridoCarga(recorrido);
+
+        double rendimiento = UtilsCarga.calcularRendimiento(recorrido, this.getLitros());
+        this.setRendimientoCarga(rendimiento);
+
+    }
 
     public Integer getCargaId() {
         return cargaId;
@@ -206,11 +222,11 @@ public class CargasDieselEntity {
         this.litrosECM = litrosECM;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -222,11 +238,11 @@ public class CargasDieselEntity {
         this.hora = hora;
     }
 
-    public Date getFechayHora() {
+    public ZonedDateTime getFechayHora() {
         return fechayHora;
     }
 
-    public void setFechayHora(Date fechayHora) {
+    public void setFechayHora(ZonedDateTime fechayHora) {
         this.fechayHora = fechayHora;
     }
 
