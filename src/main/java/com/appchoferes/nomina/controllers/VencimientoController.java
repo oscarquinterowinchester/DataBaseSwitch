@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = "http://localhost:5173")  
+// Revisar por si no agarra
 @RequestMapping("/vencimiento")
 public class VencimientoController {
     @Autowired
