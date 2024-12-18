@@ -2,16 +2,26 @@ package com.appchoferes.nomina.dtos;
 
 import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Vencimiento {
+
 @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id") 
 Long id;
-String expiration;
-String date;
-String days;
+
+@Column(name = "expiration") 
+String vencimiento;
+
+@Column(name = "date") 
+String fecha;
+
+@Column(name = "days") 
+String dias;
+
+@Column(name = "status") 
 String status;
 
 public Long getId() {
@@ -20,23 +30,23 @@ public Long getId() {
 public void setId(Long id) {
     this.id = id;
 }
-public String getExpiration() {
-    return expiration;
+public String getVencimiento() {
+    return vencimiento;
 }
-public void setExpiration(String expiration) {
-    this.expiration = expiration;
+public void setVencimiento(String vencimiento) {
+    this.vencimiento = vencimiento;
 }
-public String getDate() {
-    return date;
+public String getFecha() {
+    return fecha;
 }
-public void setDate(String date) {
-    this.date = date;
+public void setFecha(String fecha) {
+    this.fecha = fecha;
 }
-public String getDays() {
-    return days;
+public String getDias() {
+    return dias;
 }
-public void setDays(String days) {
-    this.days = days;
+public void setDias(String dias) {
+    this.dias = dias;
 }
 public String getStatus() {
     return status;

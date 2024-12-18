@@ -13,11 +13,11 @@ import com.appchoferes.nomina.repositories.IProveedoresRepository;
 public class ProveedoresService {
 
 @Autowired
-IProveedoresRepository proveedoresService;
+IProveedoresRepository proveedoresRepository;
 
 public ArrayList<ProveedoresCombustible> getProveedoresCombustible(String dbType){
     DatabaseContextHolder.setDatabaseType(dbType);
-    return (ArrayList<ProveedoresCombustible>) proveedoresService.getProveedoresCombustible();
+    return (ArrayList<ProveedoresCombustible>) proveedoresRepository.getProveedoresCombustible();
 }
 
 

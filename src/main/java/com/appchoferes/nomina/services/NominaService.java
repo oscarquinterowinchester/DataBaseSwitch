@@ -10,7 +10,10 @@ import com.appchoferes.nomina.config.DatabaseContextHolder;
 import com.appchoferes.nomina.dtos.Extras;
 import com.appchoferes.nomina.dtos.ExtrasDTO;
 import com.appchoferes.nomina.dtos.Nomina;
+import com.appchoferes.nomina.dtos.NominaPago;
+import com.appchoferes.nomina.dtos.Semana;
 import com.appchoferes.nomina.errors.ErrorInternoException;
+import com.appchoferes.nomina.operaciones.Utils;
 import com.appchoferes.nomina.repositories.IExtrasRepository;
 import com.appchoferes.nomina.repositories.INominaRepository;
 
@@ -23,6 +26,45 @@ public class NominaService {
     @Autowired
     private IExtrasRepository extrasRepository;
 
+    @Autowired
+private SemanaService semanaService;
+
+
+    public NominaPago getNominaPago(String semanaId, Long choferId, String dbType){
+
+        Utils.establecerBaseDatos(dbType);
+
+        Semana fechasIniyFin = semanaService.getFechaIniyFin(dbType, semanaId);
+        ArrayList<Nomina> nominas = getNomina(semanaId, choferId, dbType);
+
+        NominaPago nominaPago = new NominaPago();
+
+        nominaPago.setSemanas(fechasIniyFin);
+        nominaPago.setViajes(nominas);
+        nominaPago.setAutorizados(0);
+        nominaPago.setDescuento(getDescuentoNomina(semanaId,Utils.toStr(choferId), dbType,nominas));
+        nominaPago.setPendientes(0);
+        nominaPago.setTotal(0);
+
+        return nominaPago;
+
+    }
+
+    public float getDescuentoNomina(String semanaId, String choferId, String dbType,ArrayList<Nomina> nominas){
+
+
+        Utils.establecerBaseDatos(dbType);
+
+        float descuento = 0.0F;
+
+        for(Nomina nomina : nominas){
+
+            descuento = descuento + nominaRepository.getDescuento(semanaId, choferId, nomina.getItinerarioId()+"");
+        }
+
+        return  descuento;
+    }
+
     public ArrayList<Nomina> getNomina(String week, Long choferID, String dbType){
         try {
             DatabaseContextHolder.setDatabaseType(dbType);
@@ -30,7 +72,7 @@ public class NominaService {
             for (Nomina nomina : nominas) {
                 ArrayList<Extras> extras = new ArrayList<Extras>(); 
                 try {
-                    ArrayList<ExtrasDTO> extrasDTO =  (ArrayList<ExtrasDTO>)extrasRepository.getExtras(nomina.getId());
+                    ArrayList<ExtrasDTO> extrasDTO =  (ArrayList<ExtrasDTO>)extrasRepository.getExtras(nomina.getItinerarioId());
                     for (ExtrasDTO extra : extrasDTO) {
                         System.out.println(extra);
                         Extras extraAux = new Extras();

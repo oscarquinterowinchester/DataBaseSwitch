@@ -15,6 +15,7 @@ public class TipoCombustible {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tipoCombustibleId") //llave primaria aqui
     Long tipoCombustibleId;
+    
     String nombreTipo;
     boolean status;
     boolean seguimientoRendimiento;
