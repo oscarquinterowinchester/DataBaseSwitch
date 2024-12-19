@@ -1,32 +1,29 @@
 package com.appchoferes.nomina.models;
 
-import org.hibernate.annotations.ValueGenerationType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 @Entity
-@Table(name = "usuario_tabla")
-public class Usuario {
+@Table(name = "metodospago_tbl")
+public class MetodosPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
-    private Integer usuarioId;
+    @Column(name = "metodoId")
+    Long metodoId;
 
-    @Column(name = "name")
-    private String nombre;
+    @Column(name = "nombre")
+    String nombre;
 
-    public Integer getUsuarioId() {
-        return usuarioId;
+    public Long getMetodoId() {
+        return metodoId;
     }
 
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setMetodoId(Long metodoId) {
+        this.metodoId = metodoId;
     }
 
     public String getNombre() {

@@ -1,6 +1,6 @@
-package com.appchoferes.nomina.dtos;
+package com.appchoferes.nomina.modules.itinerario.models;
 import java.util.List;
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class ItinerarioChofer {
+public class DriverMoveEntity {
 
     @Id
     private Long id;
@@ -50,6 +50,6 @@ public class ItinerarioChofer {
     private String el;
 
     @ElementCollection
-    private List<ContenedorItinerario> contenedores;
+    private List<ContenedorEntity> contenedores;
 
 }

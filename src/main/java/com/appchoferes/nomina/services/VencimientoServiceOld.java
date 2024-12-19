@@ -10,7 +10,7 @@ import com.appchoferes.nomina.dtos.Vencimiento;
 import com.appchoferes.nomina.repositories.IVencimientoRepository;
 
 @Service
-public class VencimientoService {
+public class VencimientoServiceOld {
 
     @Autowired
     IVencimientoRepository vencimientoRepository;

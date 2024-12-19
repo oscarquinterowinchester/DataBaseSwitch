@@ -1,29 +1,27 @@
-package com.appchoferes.nomina.controllers;
+package com.appchoferes.nomina.modules.itinerario.controllers;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.appchoferes.nomina.dtos.ItinerarioChoferInfo;
-import com.appchoferes.nomina.services.ItinerarioChoferService;
+import com.appchoferes.nomina.modules.itinerario.models.Itinerario;
+import com.appchoferes.nomina.modules.itinerario.services.IDriverMoveService;
 
 @RestController
-@RequestMapping("/getItinerarios")
-public class ItinerarioController {
-
+@RequestMapping("/api/itinerario")
+public class DriverMoveController {
+    
     @Autowired
-    ItinerarioChoferService itinerarioService;
+    IDriverMoveService driverMoveService;
 
 
     @GetMapping("")
     public ResponseEntity<?> getItinerariosChofer(@RequestParam String choferId,@RequestParam String dbType)
     {
            
-       ItinerarioChoferInfo itinerarios = itinerarioService.getItinerario(choferId,dbType);
+       Itinerario itinerarios = driverMoveService.getItinerario(choferId,dbType);
 
         return ResponseEntity.ok(itinerarios);
     }
@@ -31,10 +29,9 @@ public class ItinerarioController {
     @GetMapping("/visto")
     public ResponseEntity<?> setItinerarioAsVisto(@RequestParam String id,@RequestParam String dbType)
     {
-       int estatus = itinerarioService.setItinerarioAsVisto(id,dbType);
+       int estatus = driverMoveService.setItinerarioAsVisto(id,dbType);
 
         return ResponseEntity.ok(estatus);
     }
-
 
 }

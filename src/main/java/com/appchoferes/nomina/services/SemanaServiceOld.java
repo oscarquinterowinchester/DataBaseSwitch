@@ -9,7 +9,7 @@ import com.appchoferes.nomina.operaciones.Utils;
 import com.appchoferes.nomina.repositories.ISemanaRepository;
 
 @Service
-public class SemanaService {
+public class SemanaServiceOld {
 
     @Autowired
     ISemanaRepository semanaRepository;

@@ -1,43 +1,42 @@
-package com.appchoferes.nomina.services;
+package com.appchoferes.nomina.modules.nomina.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.appchoferes.nomina.config.DatabaseContextHolder;
 import com.appchoferes.nomina.dtos.Extras;
-import com.appchoferes.nomina.dtos.ExtrasDTO;
-import com.appchoferes.nomina.dtos.Nomina;
-import com.appchoferes.nomina.dtos.NominaPago;
-import com.appchoferes.nomina.dtos.Semana;
 import com.appchoferes.nomina.errors.ErrorInternoException;
+import com.appchoferes.nomina.modules.nomina.dto.NominaInformacionDTO;
+import com.appchoferes.nomina.modules.nomina.dto.SemanaDTO;
+import com.appchoferes.nomina.modules.nomina.models.NominaEntity;
+import com.appchoferes.nomina.modules.nomina.repositories.ExtrasRepository;
+import com.appchoferes.nomina.modules.nomina.repositories.NominaRepository;
 import com.appchoferes.nomina.operaciones.Utils;
-import com.appchoferes.nomina.repositories.IExtrasRepository;
-import com.appchoferes.nomina.repositories.INominaRepository;
+import com.appchoferes.nomina.modules.nomina.dto.ExtrasDTO;
 
 @Service
-public class NominaService {
+public class NominaService implements INominaService {
 
     @Autowired
-    private INominaRepository nominaRepository;
+    NominaRepository nominaRepository;
 
     @Autowired
-    private IExtrasRepository extrasRepository;
+    ISemanaService semanaService;
 
     @Autowired
-private SemanaService semanaService;
-
-
-    public NominaPago getNominaPago(String semanaId, Long choferId, String dbType){
+    ExtrasRepository extrasRepository;
+    
+    @Override
+    public NominaInformacionDTO getNominaPago(String semanaId, Long choferId, String dbType)
+    {
 
         Utils.establecerBaseDatos(dbType);
 
-        Semana fechasIniyFin = semanaService.getFechaIniyFin(dbType, semanaId);
-        ArrayList<Nomina> nominas = getNomina(semanaId, choferId, dbType);
+        SemanaDTO fechasIniyFin = semanaService.getFechaIniyFin(dbType, semanaId);
+        ArrayList<NominaEntity> nominas = getNomina(semanaId, choferId, dbType);
 
-        NominaPago nominaPago = new NominaPago();
+        NominaInformacionDTO nominaPago = new NominaInformacionDTO();
 
         nominaPago.setSemanas(fechasIniyFin);
         nominaPago.setViajes(nominas);
@@ -49,15 +48,17 @@ private SemanaService semanaService;
         return nominaPago;
 
     }
+    
 
-    public float getDescuentoNomina(String semanaId, String choferId, String dbType,ArrayList<Nomina> nominas){
+    @Override
+    public float getDescuentoNomina(String semanaId, String choferId, String dbType, List<NominaEntity> nominas){
 
 
         Utils.establecerBaseDatos(dbType);
 
         float descuento = 0.0F;
 
-        for(Nomina nomina : nominas){
+        for(NominaEntity nomina : nominas){
 
             descuento = descuento + nominaRepository.getDescuento(semanaId, choferId, nomina.getItinerarioId()+"");
         }
@@ -65,14 +66,18 @@ private SemanaService semanaService;
         return  descuento;
     }
 
-    public ArrayList<Nomina> getNomina(String week, Long choferID, String dbType){
+    @Override
+    public ArrayList<NominaEntity> getNomina(String week, Long choferID, String dbType){
         try {
             DatabaseContextHolder.setDatabaseType(dbType);
-            ArrayList<Nomina> nominas = (ArrayList<Nomina>) nominaRepository.getNominas(week, choferID);
-            for (Nomina nomina : nominas) {
+            List<NominaEntity> nominas = nominaRepository.getNominas(week, choferID);
+
+            for (NominaEntity nomina : nominas) {
+
                 ArrayList<Extras> extras = new ArrayList<Extras>(); 
                 try {
-                    ArrayList<ExtrasDTO> extrasDTO =  (ArrayList<ExtrasDTO>)extrasRepository.getExtras(nomina.getItinerarioId());
+                    List<ExtrasDTO> extrasDTO =  extrasRepository.getExtras(nomina.getItinerarioId());
+
                     for (ExtrasDTO extra : extrasDTO) {
                         System.out.println(extra);
                         Extras extraAux = new Extras();
@@ -89,9 +94,10 @@ private SemanaService semanaService;
                 }
                 nomina.setExtras(extras);
             }
-            return (ArrayList<Nomina>) nominas;
+            return (ArrayList<NominaEntity>) nominas;
         } catch (Exception e) {
             throw new ErrorInternoException("Error al procesar la solicitud de nominas.");
         }
     }
+
 }

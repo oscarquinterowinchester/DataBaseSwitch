@@ -2,6 +2,8 @@ package com.appchoferes.nomina.dtos;
 
 import java.util.List;
 
+import com.appchoferes.nomina.models.MetodosPago;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 

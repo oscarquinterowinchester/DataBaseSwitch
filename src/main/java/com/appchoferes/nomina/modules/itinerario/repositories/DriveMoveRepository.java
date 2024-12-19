@@ -1,17 +1,17 @@
-package com.appchoferes.nomina.repositories;
+package com.appchoferes.nomina.modules.itinerario.repositories;
 import java.util.List;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import com.appchoferes.nomina.dtos.ItinerarioChofer;
+import org.springframework.stereotype.Repository;
+import com.appchoferes.nomina.modules.itinerario.models.DriverMoveEntity;
 
-public interface ItinerarioChoferRepository extends CrudRepository<ItinerarioChofer,Long>{
+
+@Repository
+public interface DriveMoveRepository extends CrudRepository<DriverMoveEntity,Long>{
 
     @Query(value = "CALL DM_getItinerarioChofer(:choferId);", nativeQuery = true)
-    public List<ItinerarioChofer> getItinerarioChofer(String choferId);
+    public List<DriverMoveEntity> getDriveMoveByChofer(String choferId);
 
     @Query(value = "CALL DM_setItinerarioAsVisto(:itinerarioId);", nativeQuery = true)
     public int setItinerarioAsVisto(String itinerarioId);
-
-
 }

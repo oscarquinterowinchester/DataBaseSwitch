@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.appchoferes.nomina.config.DatabaseContextHolder;
-import com.appchoferes.nomina.dtos.MetodosPago;
+import com.appchoferes.nomina.models.MetodosPago;
 import com.appchoferes.nomina.repositories.IMetodosPagoRepository;
 
 @Service

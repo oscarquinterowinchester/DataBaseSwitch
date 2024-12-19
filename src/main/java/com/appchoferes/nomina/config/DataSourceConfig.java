@@ -22,9 +22,11 @@ import java.util.Map;
 @EnableTransactionManagement
 /*Contexto de repositorios*/
 @EnableJpaRepositories(
-    entityManagerFactoryRef = "springEntityManagerFactory", transactionManagerRef = "springTransactionManager", basePackages = {
-        "com.appchoferes.nomina.repositories",
-})
+    entityManagerFactoryRef = "springEntityManagerFactory", transactionManagerRef = "springTransactionManager", 
+    basePackages = {"com.appchoferes.nomina.repositories", "com.appchoferes.nomina.modules"})
+
+/**basePackages = {"com.appchoferes.nomina.repositories", "com.appchoferes.nomina.modules.itinerario.repositories"}
+ */
 public class DataSourceConfig {
 
     @Autowired
@@ -65,7 +67,8 @@ public class DataSourceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.appchoferes.nomina.models", "com.appchoferes.nomina.dtos");
+        em.setPackagesToScan("com.appchoferes.nomina.models", "com.appchoferes.nomina.dtos",
+        "com.appchoferes.nomina.modules");
         //em.setPackagesToScan("com.appchoferes.nomina.models");
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();

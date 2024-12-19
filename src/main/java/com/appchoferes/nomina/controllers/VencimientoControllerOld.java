@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appchoferes.nomina.dtos.Vencimiento;
-import com.appchoferes.nomina.services.VencimientoService;
+import com.appchoferes.nomina.services.VencimientoServiceOld;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,22 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "http://localhost:4200")  
 // Revisar por si no agarra
 @RequestMapping("/vencimiento")
-public class VencimientoController {
+public class VencimientoControllerOld {
     @Autowired
-    VencimientoService vencimientoService;
+    VencimientoServiceOld vencimientoService;
 
     @GetMapping("")
     public ArrayList<Vencimiento> getVencimientos(@RequestParam String choferId,@RequestParam String dbType){
-
-
-        JSONObject data = new JSONObject();
-        JSONObject objeto = new JSONObject();
-
-        data.put("vencidos",0);
-        data.put("bien",4);
         
-
-
         return vencimientoService.getVencimiento(choferId, dbType);
+        
     }
 }

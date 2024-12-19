@@ -1,9 +1,9 @@
-package com.appchoferes.nomina.dtos;
+package com.appchoferes.nomina.modules.nomina.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Deprecated
+
 @Entity
 public class ExtrasDTO {
     @Id

@@ -1,6 +1,9 @@
-package com.appchoferes.nomina.dtos;
+package com.appchoferes.nomina.modules.nomina.models;
+
 
 import java.util.ArrayList;
+
+import com.appchoferes.nomina.dtos.Extras;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,12 +14,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Nomina {
+@Entity
+public class NominaEntity {
+
     @Id
     @Column(name = "id")
     Long itinerarioId;
