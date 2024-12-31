@@ -2,6 +2,7 @@ package com.appchoferes.nomina.modules.itinerario.modules.combustible.DTO;
 
 import java.util.List;
 
+import jakarta.persistence.ElementCollection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class VentanaHistorialCarga {
 
     CamionesConCargaDTO camion;
     
-    List<Object []> historial;
+    @ElementCollection
+    List<CargasHistorialPrevio> historial;
 
 }

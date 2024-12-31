@@ -1,12 +1,10 @@
-package com.appchoferes.nomina.dtos;
+package com.appchoferes.nomina.modules.itinerario.modules.combustible.models;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
-import com.appchoferes.nomina.operaciones.Utils;
 import com.appchoferes.nomina.operaciones.UtilsCarga;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
@@ -48,6 +46,7 @@ public class CargasDieselEntity {
     @Column(name = "LitrosECM")
     private Double litrosECM;
 
+    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "Fecha")
     private LocalDate fecha;
@@ -116,11 +115,11 @@ public class CargasDieselEntity {
     @Column(name = "FotoSello")
     private String fotoSello;
 
-    @Column(name = "Sellos2")
-    private String sellos2;
+    // @Column(name = "Sellos2")
+    // private String sellos2;
 
-    @Column(name = "FotoSello2")
-    private String fotoSello2;
+    // @Column(name = "FotoSello2")
+    // private String fotoSello2;
 
     @Column(name = "PrecioTotal")
     private Double precioTotal;

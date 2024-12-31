@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.appchoferes.nomina.dtos.CargasDieselEntity;
 import com.appchoferes.nomina.dtos.VistaCargaCamion;
+import com.appchoferes.nomina.modules.itinerario.modules.combustible.models.CargasDieselEntity;
+import com.appchoferes.nomina.modules.itinerario.modules.combustible.services.CargaDieselService;
 import com.appchoferes.nomina.services.MetodosPagoService;
 import com.appchoferes.nomina.services.ProveedoresService;
 import com.appchoferes.nomina.services.TiposCombustibleService;
 import com.appchoferes.nomina.services.VistaCargaCamionService;
 import com.appchoferes.nomina.services.CamionCargaService;
-import com.appchoferes.nomina.services.CargaDieselService;
 
 
 

@@ -16,7 +16,10 @@ public interface CamionesConCargaRepository extends JpaRepository<CamionesConCar
     // @Query(value = "call com_getCamionesTablaDiesel()", nativeQuery = true)
     // List<Object[]> getCamionesConCargasRaw();
     
-    @Query(value = "call com_getCamion(:id)", nativeQuery = true)
+    @Query(value = "call com_getCamionByItinerarioId(:id)", nativeQuery = true)
     CamionesConCargaDTO getCamionRaw(@Param("id") Long id);
+
+    @Query(value = "SELECT com_getCamionIdByItinerarioId(:id)", nativeQuery = true)
+    Long getCamionIdByItinerario(@Param("id") Long id);
 
 }

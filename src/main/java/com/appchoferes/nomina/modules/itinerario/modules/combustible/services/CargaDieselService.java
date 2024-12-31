@@ -1,33 +1,23 @@
-package com.appchoferes.nomina.services;
+package com.appchoferes.nomina.modules.itinerario.modules.combustible.services;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
-import com.appchoferes.nomina.config.DatabaseContextHolder;
-import com.appchoferes.nomina.dtos.CargasDieselEntity;
+import com.appchoferes.nomina.modules.itinerario.modules.combustible.models.CargasDieselEntity;
+import com.appchoferes.nomina.modules.itinerario.modules.combustible.repositories.CargasDieselRepository;
 import com.appchoferes.nomina.operaciones.UtilsCarga;
 import com.appchoferes.nomina.operaciones.Utils;
-import com.appchoferes.nomina.repositories.CargasDieselReporsitory;
-
 import com.appchoferes.nomina.validators.Validador;
 
 @Service
-public class CargaDieselService {
+public class CargaDieselService implements ICargaDieselService {
 
 
     @Autowired
-    CargasDieselReporsitory cargasDieselReporsitory;
+    CargasDieselRepository cargasDieselReporsitory;
 
     @Autowired
     Validador val;
@@ -36,7 +26,8 @@ public class CargaDieselService {
     {
         Utils.establecerBaseDatos(dbType);
         return cargasDieselReporsitory.findByCargaId(Integer.parseInt(cargaId));
-            }
+    
+    }
 
     public ResponseEntity<String> procesarCarga(CargasDieselEntity carga,String dbType)
     {

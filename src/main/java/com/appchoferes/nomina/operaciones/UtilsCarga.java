@@ -6,21 +6,18 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
-
-import com.appchoferes.nomina.dtos.CargasDieselEntity;
-import com.appchoferes.nomina.repositories.CargasDieselReporsitory;
+import com.appchoferes.nomina.modules.itinerario.modules.combustible.models.CargasDieselEntity;
+import com.appchoferes.nomina.modules.itinerario.modules.combustible.repositories.CargasDieselRepository;
 import com.appchoferes.nomina.validators.Validador;
 
 public class UtilsCarga {
     @Autowired
-    static CargasDieselReporsitory cargasDieselReporsitory;
+    static CargasDieselRepository CargasDieselRepository;
 
     
 
@@ -63,7 +60,7 @@ public class UtilsCarga {
         return valorRetorno;
     }
 
-    public static Map<String,Object> datosCargaSonValidos(CargasDieselEntity carga,CargasDieselReporsitory repo,int tipoOperacion){
+    public static Map<String,Object> datosCargaSonValidos(CargasDieselEntity carga,CargasDieselRepository repo,int tipoOperacion){
         
         Map<String,Object> errores = new HashMap<>();
         if(carga == null){
@@ -136,7 +133,7 @@ public class UtilsCarga {
 
 
 
-    public static boolean fechaNoEsValida(CargasDieselEntity carga,CargasDieselReporsitory repo,int tipoOperacion){
+    public static boolean fechaNoEsValida(CargasDieselEntity carga,CargasDieselRepository repo,int tipoOperacion){
 
         boolean esPrimerRegistro = repo.esPrimerRegistro(carga.getUnidadId(), carga.getTipo());
         boolean esFechaNula = (Validador.validarDate(String.valueOf(carga.getFecha())) == null);
@@ -147,7 +144,7 @@ public class UtilsCarga {
         if(esPrimerRegistro){ // No hace falta validar fechas
             return false;
         }
-
+        // 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // adjust the pattern to match your string format
         String ultimaFechaStr = obtenerUltimaFecha(carga,repo,tipoOperacion);
         LocalDateTime ultimaFecha = LocalDateTime.parse(ultimaFechaStr, formatter);
@@ -159,7 +156,7 @@ public class UtilsCarga {
         return fechaEsValida;
     }
 
-    private static String obtenerUltimaFecha(CargasDieselEntity carga,CargasDieselReporsitory repo,int tipoOperacion){
+    private static String obtenerUltimaFecha(CargasDieselEntity carga,CargasDieselRepository repo,int tipoOperacion){
 
         String unidadId = String.valueOf(carga.getUnidadId());
         int tipoUnidad = carga.getTipo();
@@ -169,7 +166,7 @@ public class UtilsCarga {
         return ultimaFecha;
     }
 
-    public static boolean distanciaNoEsValida(CargasDieselEntity carga,CargasDieselReporsitory repo,int tipoOperacion){
+    public static boolean distanciaNoEsValida(CargasDieselEntity carga,CargasDieselRepository repo,int tipoOperacion){
         boolean esPrimerRegistro = repo.esPrimerRegistro(carga.getUnidadId(), carga.getTipo());
         boolean esOdoCargaInvalido  = Validador.validarDouble(carga.getOdometroCarga()) <= 0;
         
@@ -188,7 +185,7 @@ public class UtilsCarga {
         return recorridoEsValido;
     }
 
-    public static String obtenerUltimoOdometro(CargasDieselEntity carga,CargasDieselReporsitory repo,int tipoOperacion){
+    public static String obtenerUltimoOdometro(CargasDieselEntity carga,CargasDieselRepository repo,int tipoOperacion){
 
         String unidadId = String.valueOf(carga.getUnidadId());
         int tipoUnidad = carga.getTipo();
@@ -227,12 +224,12 @@ public class UtilsCarga {
         return rendimiento;
     }
 
-    public static ResponseEntity<String> revisarCampos(CargasDieselEntity carga,CargasDieselReporsitory cargasDieselReporsitory2,int tipoOperacion) {
+    public static ResponseEntity<String> revisarCampos(CargasDieselEntity carga,CargasDieselRepository CargasDieselRepository2,int tipoOperacion) {
         
         Map<String,Object> errores = null;
         Boolean campoEsValido = false; // Declaracion
 
-        errores = UtilsCarga.datosCargaSonValidos(carga,cargasDieselReporsitory2,tipoOperacion);
+        errores = UtilsCarga.datosCargaSonValidos(carga,CargasDieselRepository2,tipoOperacion);
         campoEsValido = Validador.validarBoolean(String.valueOf(errores.get("esValido")));
 
         if(campoEsValido == false){

@@ -7,6 +7,6 @@ import com.appchoferes.nomina.modules.itinerario.modules.combustible.DTO.Ventana
 @Service
 public interface IVentanaHistorialCargaService {
 
-    public VentanaHistorialCarga getVentanaHistorialCarga(Long unidadId,int tipoUnidad,String dbType);
+    public VentanaHistorialCarga getVentanaHistorialCarga(Long itinerarioId, String dbType);
 
 }
