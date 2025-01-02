@@ -38,6 +38,21 @@ public class Validador {
         return valorHora;
     }
 
+    public static String toStr(Object valor){
+
+        String valorStr = "";
+        try{
+
+            valorStr = String.valueOf(valor);
+
+        }catch(NullPointerException e){
+
+            valorStr = "";
+        }
+
+        return valorStr;
+    }
+
     public static Date validarDate(String valorObjeto)
     {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -118,6 +133,20 @@ public class Validador {
             return true;
         }
         return false;
+    } 
+
+    public static boolean objetoEsValido(Object valorObjeto){
+        try{
+        if(valorObjeto == null){
+            return false;
+        }
+        if(valorObjeto.toString().isEmpty()){
+            return false;
+        }
+        }catch(NullPointerException e){
+            return false;
+        }
+        return true;
     } 
 
 }

@@ -13,10 +13,13 @@ public class SemanaService implements ISemanaService
 
     @Autowired
     SemanaRepository semanaRepository;
+
+    @Autowired
+    Utils utils;
     
     public SemanaDTO getFechaIniyFin(String dbType, String semanaId)
     {
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
         return semanaRepository.getSemanas(semanaId);
 
     }

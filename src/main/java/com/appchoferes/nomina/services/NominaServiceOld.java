@@ -27,12 +27,15 @@ public class NominaServiceOld {
     private IExtrasRepository extrasRepository;
 
     @Autowired
-private SemanaServiceOld semanaService;
+    private SemanaServiceOld semanaService;
+
+    @Autowired
+    Utils utils;
 
 
     public NominaPago getNominaPago(String semanaId, Long choferId, String dbType){
 
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         Semana fechasIniyFin = semanaService.getFechaIniyFin(dbType, semanaId);
         ArrayList<Nomina> nominas = getNomina(semanaId, choferId, dbType);
@@ -53,7 +56,7 @@ private SemanaServiceOld semanaService;
     public float getDescuentoNomina(String semanaId, String choferId, String dbType,ArrayList<Nomina> nominas){
 
 
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         float descuento = 0.0F;
 

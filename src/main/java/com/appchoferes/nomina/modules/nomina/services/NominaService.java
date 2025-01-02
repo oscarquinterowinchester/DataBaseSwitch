@@ -26,12 +26,15 @@ public class NominaService implements INominaService {
 
     @Autowired
     ExtrasRepository extrasRepository;
+
+    @Autowired
+    Utils utils;
     
     @Override
     public NominaInformacionDTO getNominaPago(String semanaId, Long choferId, String dbType)
     {
 
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         SemanaDTO fechasIniyFin = semanaService.getFechaIniyFin(dbType, semanaId);
         ArrayList<NominaEntity> nominas = getNomina(semanaId, choferId, dbType);
@@ -54,7 +57,7 @@ public class NominaService implements INominaService {
     public float getDescuentoNomina(String semanaId, String choferId, String dbType, List<NominaEntity> nominas){
 
 
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         float descuento = 0.0F;
 

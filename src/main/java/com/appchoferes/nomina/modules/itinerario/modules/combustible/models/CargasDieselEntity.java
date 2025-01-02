@@ -3,7 +3,10 @@ package com.appchoferes.nomina.modules.itinerario.modules.combustible.models;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.appchoferes.nomina.operaciones.UtilsCarga;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,16 +18,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "cargasDiesel_tbl")
 public class CargasDieselEntity {
+
+    public CargasDieselEntity(){
+
+        this.status = true;
+        this.esChofer = true;
+        
+        LocalDateTime fechaRegistro = LocalDateTime.now();
+        this.fechaRegistro = fechaRegistro;
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,7 +76,7 @@ public class CargasDieselEntity {
     private String nota;
 
     @Column(name = "FechaRegistro")
-    private Date fechaRegistro;
+    private LocalDateTime fechaRegistro;
 
     @Column(name = "Status")
     private Boolean status;
@@ -114,12 +125,6 @@ public class CargasDieselEntity {
 
     @Column(name = "FotoSello")
     private String fotoSello;
-
-    // @Column(name = "Sellos2")
-    // private String sellos2;
-
-    // @Column(name = "FotoSello2")
-    // private String fotoSello2;
 
     @Column(name = "PrecioTotal")
     private Double precioTotal;

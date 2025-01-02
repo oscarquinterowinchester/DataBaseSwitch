@@ -18,11 +18,14 @@ public class DriverMoveService implements IDriverMoveService{
 
     @Autowired
     ContenedorRepository contenedorRepository;
+
+    @Autowired
+    Utils utils;
     
     @Override
     public int setItinerarioAsVisto(String itinerarioId,String dbType)
     {
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         return driverMoveRepository.setItinerarioAsVisto(itinerarioId);
         
@@ -32,7 +35,7 @@ public class DriverMoveService implements IDriverMoveService{
     public Itinerario getItinerario(String choferId,String dbType)
     {
 
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         Itinerario data = getInformacionItinerario(choferId);
         

@@ -21,12 +21,15 @@ public class VentanaHistorialCargaService implements IVentanaHistorialCargaServi
     @Autowired
     CamionesConCargaRepository camionesConCargaRepo;
 
+    @Autowired
+    Utils utils;
+
    private  String dbType = "";
 
     @Override
     public VentanaHistorialCarga getVentanaHistorialCarga(Long itinerarioId, String dbType) {
         
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         this.dbType = dbType;
 
@@ -39,7 +42,7 @@ public class VentanaHistorialCargaService implements IVentanaHistorialCargaServi
 
     public VentanaHistorialCarga getVentanaInformacionByItinerarioId(Long itinerarioId){
 
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         VentanaHistorialCarga ventanaInformacion = new VentanaHistorialCarga();
 
@@ -54,7 +57,7 @@ public class VentanaHistorialCargaService implements IVentanaHistorialCargaServi
     }
 
     public CamionesConCargaDTO getCamionByItinerarioId(Long itinerarioId){
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         CamionesConCargaDTO camion = camionesConCargaRepo.getCamionRaw(itinerarioId);    
 
@@ -63,7 +66,7 @@ public class VentanaHistorialCargaService implements IVentanaHistorialCargaServi
 
     public List<CargasHistorialPrevio> getHistorialCargaByItinerarioId(Long itinerarioId){
 
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
         Long unidadId = getUnidadByItinerarioId(itinerarioId);
 
@@ -74,7 +77,7 @@ public class VentanaHistorialCargaService implements IVentanaHistorialCargaServi
         return historial;
     }
     public Long getUnidadByItinerarioId(Long itinerarioId){
-        Utils.establecerBaseDatos(dbType);
+        utils.establecerBaseDatos(dbType);
 
       return  camionesConCargaRepo.getCamionIdByItinerario(itinerarioId);
 

@@ -3,10 +3,8 @@ package com.appchoferes.nomina.modules.itinerario.modules.combustible.repositori
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import com.appchoferes.nomina.modules.itinerario.modules.combustible.models.CargasDieselEntity;
 
-import java.util.List;
 
 
 @Repository
