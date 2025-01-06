@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import com.appchoferes.nomina.dtos.VistaCargaCamion;
 import com.appchoferes.nomina.modules.itinerario.modules.combustible.models.CargasDieselEntity;
 import com.appchoferes.nomina.modules.itinerario.modules.combustible.services.CargaDieselService;
-import com.appchoferes.nomina.services.MetodosPagoService;
 import com.appchoferes.nomina.services.ProveedoresService;
 import com.appchoferes.nomina.services.TiposCombustibleService;
 import com.appchoferes.nomina.services.VistaCargaCamionService;
@@ -26,9 +25,6 @@ public class CargasDieselController {
 
    @Autowired
    CamionCargaService vistaCamionCargaService;
-
-   @Autowired
-   MetodosPagoService metodosPagoService;
 
    @Autowired
    TiposCombustibleService tiposCombustibleService;

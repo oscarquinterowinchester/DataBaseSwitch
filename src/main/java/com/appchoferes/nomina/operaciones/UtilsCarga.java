@@ -68,57 +68,67 @@ public class UtilsCarga {
             errores.put("esValido", false);
             return errores;
         }
-        if(Validador.validarInteger(carga.getTipo()) > 1 || Validador.validarInteger(carga.getTipo()) < 0){
+        carga.getTipo();
+        if((Validador.validarInteger(carga.getTipo()) > 1 || Validador.validarInteger(carga.getTipo()) < 0) || Validador.objetoNoEsValido(carga.getTipo())){
             errores.put("campoErroneo", "Tipo unidad invalido: " + carga.getTipo());
             errores.put("esValido", false);
             return errores;
         }
+
         if(Validador.validarInteger(carga.getUnidadId()) <= 0)
         {
             errores.put("campoErroneo", "UnidadID: " + carga.getUnidadId());
             errores.put("esValido", false);
             return errores; 
         }
+
         if(Validador.validarInteger(carga.getTipoCombustible()) <= 0 ){
             errores.put("campoErroneo", "Tipo de combustible no valido: " + carga.getTipoCombustible());
             errores.put("esValido", false);    
             return errores;
         }
+
         if(Validador.validarInteger(carga.getUsuarioId()) <= 0)
         {
             errores.put("campoErroneo", "UsuarioID no puede ser 0: " + carga.getUsuarioId());
             errores.put("esValido", false);
             return errores;      
         }
+
         if(Validador.validarInteger(carga.getMonedaCarga()) > 1 || Validador.validarInteger(carga.getMonedaCarga()) < 0){
             errores.put("campoErroneo", "Moneda carga solo acepta 1 o 0: " + carga.getMonedaCarga());
             errores.put("esValido", false);
             return errores;
         }
+
         if(Validador.validarDouble(carga.getLitros()) <= 0.0)
         {
             errores.put("campoErroneo", "Litros no validos; no puede ser 0 y no numerico: " + carga.getLitros());
             errores.put("esValido", false);
             return errores;      
         }
+
         if(Validador.validarDouble(carga.getPrecioTotal()) <= 0.0)
         {
             errores.put("campoErroneo", "Precio total no puede ser 0: " + carga.getPrecioTotal());
             errores.put("esValido", false);
             return errores;      
         }
+
         if(distanciaNoEsValida(carga,repo,tipoOperacion))
         {
             errores.put("campoErroneo", "Odometro no valido; no puede ser 0, menor o mayor a 4000 del ultimo: " + carga.getOdometroCarga());
             errores.put("esValido", false);
             return errores;
         }
+
         if(fechaNoEsValida(carga,repo,tipoOperacion))
         {
             errores.put("campoErroneo", "Fecha no puede ser menor a la ultima: " + carga.getFecha());
             errores.put("esValido", false);   
             return errores;
         }
+
         if(Validador.validarTime(String.valueOf(carga.getHora())) == null)
         {
             System.out.println("HoraRaw: " + carga.getHora());
@@ -126,6 +136,7 @@ public class UtilsCarga {
             errores.put("esValido", false);   
             return errores;
         }
+        
         errores.put("campoErroneo", "");
         errores.put("esValido", true); 
         return errores;
@@ -188,7 +199,7 @@ public class UtilsCarga {
     public static String obtenerUltimoOdometro(CargasDieselEntity carga,CargasDieselRepository repo,int tipoOperacion){
 
         String unidadId = String.valueOf(carga.getUnidadId());
-        int tipoUnidad = carga.getTipo();
+        int tipoUnidad = Validador.validarInteger(carga.getTipo());
 
        String ultimoOdometro = repo.obtenerUltimoOdometro(unidadId, tipoUnidad, tipoOperacion);
 

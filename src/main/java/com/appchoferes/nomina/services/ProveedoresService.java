@@ -1,6 +1,7 @@
 package com.appchoferes.nomina.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ public class ProveedoresService {
 @Autowired
 IProveedoresRepository proveedoresRepository;
 
-public ArrayList<ProveedoresCombustible> getProveedoresCombustible(String dbType){
+public List<ProveedoresCombustible> getProveedoresCombustible(String dbType){
     DatabaseContextHolder.setDatabaseType(dbType);
-    return (ArrayList<ProveedoresCombustible>) proveedoresRepository.getProveedoresCombustible();
+    return proveedoresRepository.getProveedoresCombustible();
 }
 
 

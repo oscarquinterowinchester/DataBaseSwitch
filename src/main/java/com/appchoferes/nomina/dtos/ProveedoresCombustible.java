@@ -6,34 +6,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "proveedores_tbl")
 public class ProveedoresCombustible {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "proveedorId")
-    Long proveedorId;
+    @Column(name = "id")
+    Long id;
 
-    @Column(name = "nComercial")
-    String nComercial;
-
-    public Long getProveedorId() {
-        return proveedorId;
-    }
-
-    public void setProveedorId(Long proveedorId) {
-        this.proveedorId = proveedorId;
-    }
-
-    public String getnComercial() {
-        return nComercial;
-    }
-
-    public void setnComercial(String nComercial) {
-        this.nComercial = nComercial;
-    }
+    @Column(name = "nombre")
+    String nombre;
 
     
 }

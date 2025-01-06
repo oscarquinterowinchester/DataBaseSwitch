@@ -1,9 +1,6 @@
 package com.appchoferes.nomina.dtos;
 
 import java.util.List;
-
-import com.appchoferes.nomina.models.MetodosPago;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -15,7 +12,7 @@ public class VistaCargaCamion {
     List<CargasDiesel> cargasDiesel;
     List<ProveedoresCombustible> proveedores;
     List<TipoCombustible> tipoCombustibles;
-    List<MetodosPago> metodosPagos;
+    // List<MetodosPago> metodosPagos;
     
     public List<TipoCombustible> getTipoCombustibles() {
         return tipoCombustibles;
@@ -23,12 +20,12 @@ public class VistaCargaCamion {
     public void setTipoCombustibles(List<TipoCombustible> tipoCombustibles) {
         this.tipoCombustibles = tipoCombustibles;
     }
-    public List<MetodosPago> getMetodosPagos() {
-        return metodosPagos;
-    }
-    public void setMetodosPagos(List<MetodosPago> metodosPagos) {
-        this.metodosPagos = metodosPagos;
-    }
+    // public List<MetodosPago> getMetodosPagos() {
+    //     return metodosPagos;
+    // }
+    // public void setMetodosPagos(List<MetodosPago> metodosPagos) {
+    //     this.metodosPagos = metodosPagos;
+    // }
     public Long getCamionId() {
         return camionId;
     }

@@ -9,7 +9,7 @@ import com.appchoferes.nomina.dtos.ProveedoresCombustible;
 
 public interface IProveedoresRepository extends JpaRepository<ProveedoresCombustible,Long>{
 
-    @Query(value = "CALL `PROVEEDORES_COMBUSTIBLE_SP`();",nativeQuery = true)
+    @Query(value = "CALL getProveedores();",nativeQuery = true)
     public List<ProveedoresCombustible> getProveedoresCombustible();
 
 }

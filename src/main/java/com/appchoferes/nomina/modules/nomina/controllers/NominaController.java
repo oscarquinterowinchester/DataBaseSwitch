@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appchoferes.nomina.errors.ErrorInternoException;
 import com.appchoferes.nomina.errors.NotFoundException;
 import com.appchoferes.nomina.modules.nomina.dto.NominaInformacionDTO;
+import com.appchoferes.nomina.modules.nomina.dto.SemanasNominaDTO;
 import com.appchoferes.nomina.modules.nomina.models.NominaEntity;
 import com.appchoferes.nomina.modules.nomina.services.INominaService;
+import com.appchoferes.nomina.modules.nomina.services.SemanasNominaService;
 
 @RestController
 @RequestMapping("/api/nomina")
@@ -22,6 +24,8 @@ public class NominaController {
 @Autowired
 private INominaService nominaService;   
 
+@Autowired
+private SemanasNominaService semanasNominaService;
 
 
 @GetMapping("")
@@ -33,6 +37,13 @@ return ResponseEntity.ok(nominaPago);
 }
 
 
+@GetMapping("/semanasNomina")
+public  ResponseEntity<?> getSemanasNomina(@RequestParam String dbType){
+
+    List<SemanasNominaDTO> semanas =  semanasNominaService.getSemanasNomina(dbType);
+
+return ResponseEntity.ok(semanas);
+}
 
 // @GetMapping("")
 // public  ResponseEntity<?> getNomina(@RequestParam String semanaId, @RequestParam Long choferId, @RequestParam String dbType){

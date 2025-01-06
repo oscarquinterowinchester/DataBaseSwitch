@@ -47,7 +47,7 @@ public class VistaCargaCamionService {
 
         vistaCamionCarga.setCargasDiesel(cargasDiesel);
         vistaCamionCarga.setProveedores(proveedoresRepository.getProveedoresCombustible());
-        vistaCamionCarga.setMetodosPagos(metodosPagoRepository.getMetodosPago());
+        // vistaCamionCarga.setMetodosPagos(metodosPagoRepository.getMetodosPago());
         vistaCamionCarga.setTipoCombustibles(tiposCombustibleRepository.getTipoCombustible());
         return vistaCamionCarga;
     }

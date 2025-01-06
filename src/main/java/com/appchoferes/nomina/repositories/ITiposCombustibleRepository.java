@@ -11,7 +11,7 @@ import com.appchoferes.nomina.dtos.TipoCombustible;
 @Repository
 public interface ITiposCombustibleRepository extends JpaRepository<TipoCombustible,Long> {
 
-   @Query(value = "CALL `TIPO_COMBUSTIBLE_SP`();", nativeQuery = true)
+   @Query(value = "CALL com_getTipoCombustible();", nativeQuery = true)
    public List<TipoCombustible> getTipoCombustible();
 
 }

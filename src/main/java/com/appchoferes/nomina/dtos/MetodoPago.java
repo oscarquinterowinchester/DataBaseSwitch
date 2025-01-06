@@ -1,4 +1,4 @@
-package com.appchoferes.nomina.modules.itinerario.modules.combustible.models;
+package com.appchoferes.nomina.dtos;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,10 +18,10 @@ public class MetodoPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MetodoID")
-    private int metodoId;
+    @Column(name = "id")
+    private int id;
 
-    @Column(name = "Nombre")
+    @Column(name = "nombre")
     private String nombre;
 
 }

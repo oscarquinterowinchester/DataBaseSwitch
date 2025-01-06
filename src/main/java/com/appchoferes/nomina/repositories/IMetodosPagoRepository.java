@@ -1,15 +1,14 @@
 package com.appchoferes.nomina.repositories;
 
 import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import com.appchoferes.nomina.dtos.MetodoPago;
 
-import com.appchoferes.nomina.models.MetodosPago;
 
 @Repository
-public interface IMetodosPagoRepository extends JpaRepository<MetodosPago,Long>{
-    @Query(value = "CALL `METODOS_PAGO_SP`();",nativeQuery = true)
-    public List<MetodosPago> getMetodosPago();
+public interface IMetodosPagoRepository extends CrudRepository<MetodoPago,Long>{
+    @Query(value = "CALL `com_getMetodosPago`();",nativeQuery = true)
+    public List<MetodoPago> getMetodosPago();
 }
