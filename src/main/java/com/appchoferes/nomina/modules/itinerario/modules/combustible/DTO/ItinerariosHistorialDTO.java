@@ -17,9 +17,9 @@ public class ItinerariosHistorialDTO {
     @Id
     private Long ItinerarioID;
 
-    private String estadocarga;
-
     private double km;
+
+    private String estadoCarga;
 
     private String ruta;
 

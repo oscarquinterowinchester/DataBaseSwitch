@@ -135,6 +135,20 @@ public class Validador {
         return false;
     } 
 
+    public boolean esObjetoInvalido(Object valorObjeto){
+        try{
+        if(valorObjeto == null){
+            return true;
+        }
+        if(valorObjeto.toString().isEmpty()){
+            return true;
+        }
+        }catch(NullPointerException e){
+            return true;
+        }
+        return false;
+    } 
+
     public static boolean objetoEsValido(Object valorObjeto){
         try{
         if(valorObjeto == null){

@@ -40,16 +40,17 @@ public class CargaDieselService implements ICargaDieselService {
 
     public ResponseEntity<String> procesarCarga(CargasDieselEntity carga,String dbType)
     {
-        HttpStatusCode codigoFormatoIncorrecto = HttpStatusCode.valueOf(400);
+        // HttpStatusCode codigoFormatoIncorrecto = HttpStatusCode.valueOf(400);
         int operacionInsercion = 0;
 
         utils.establecerBaseDatos(dbType);
 
         ResponseEntity<String> respuestaCamposValidos = UtilsCarga.revisarCampos(carga,cargasDieselReporsitory,operacionInsercion);
 
-        if(respuestaCamposValidos.getStatusCode() == codigoFormatoIncorrecto){
-            return respuestaCamposValidos;
-        }
+        // if(respuestaCamposValidos.getStatusCode() == codigoFormatoIncorrecto){
+
+        //     return respuestaCamposValidos;
+        // }
         
         String ultimoOdometro = UtilsCarga.obtenerUltimoOdometro(carga, cargasDieselReporsitory, operacionInsercion);
         carga.calcularRecorridoyRendimiento(ultimoOdometro);

@@ -5,14 +5,16 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.appchoferes.nomina.errors.ErrorInternoException;
 import com.appchoferes.nomina.errors.NotFoundException;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionsController {
     
     @ExceptionHandler(NotFoundException.class)
@@ -37,4 +39,19 @@ public class ExceptionsController {
         
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        // Extraer el mensaje directamente de la excepción
+        String errorMessage = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<String> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
+        // Extraer el mensaje directamente de la excepción
+        String errorMessage = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+    }
+    
 }

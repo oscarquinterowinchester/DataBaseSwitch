@@ -103,7 +103,7 @@ public class UtilsCarga {
 
         if(Validador.validarDouble(carga.getLitros()) <= 0.0)
         {
-            errores.put("campoErroneo", "Litros no validos; no puede ser 0 y no numerico: " + carga.getLitros());
+            errores.put("campoErroneo", "Volumen no valido; no puede ser 0 y no numerico: " + carga.getLitros());
             errores.put("esValido", false);
             return errores;      
         }
@@ -117,7 +117,8 @@ public class UtilsCarga {
 
         if(distanciaNoEsValida(carga,repo,tipoOperacion))
         {
-            errores.put("campoErroneo", "Odometro no valido; no puede ser 0, menor o mayor a 4000 del ultimo: " + carga.getOdometroCarga());
+            String ultimoOdometro = obtenerUltimoOdometro(carga,repo,tipoOperacion);
+            errores.put("campoErroneo", "Odometro no valido; no puede ser 0, menor o mayor a 4000 del ultimo ("+ultimoOdometro+"): " + carga.getOdometroCarga());
             errores.put("esValido", false);
             return errores;
         }
@@ -244,7 +245,10 @@ public class UtilsCarga {
         campoEsValido = Validador.validarBoolean(String.valueOf(errores.get("esValido")));
 
         if(campoEsValido == false){
-            return ResponseEntity.badRequest().body("Error en los formatos: "+ errores.get("campoErroneo")); // Invalid data
+           
+            throw new IllegalArgumentException("El valor proporcionado no es válido: " + errores.get("campoErroneo"));
+
+          //  return ResponseEntity.badRequest().body("Error en los formatos: "+ errores.get("campoErroneo")); // Invalid data
         } // Validacion de datos
 
         return ResponseEntity.ok("guardado con exito!");
