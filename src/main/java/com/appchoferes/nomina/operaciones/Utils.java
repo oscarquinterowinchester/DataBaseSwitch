@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.File;
 import java.util.Base64;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.appchoferes.nomina.config.DatabaseContextHolder;
@@ -46,6 +48,11 @@ public void establecerBaseDatos(String baseDatos)
         }
         return str;
 
+    }
+
+    public void throwRunTimeException(String mensaje){
+
+        throw new RuntimeException(mensaje);
     }
 
     public static String toStr(Object valor){

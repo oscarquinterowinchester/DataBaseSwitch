@@ -14,8 +14,19 @@ public class FileStorageProperties {
     private String fotoTanque1Path;
     private String fotoTanque2Path;
     private String fotoFirmaPath;
+    private String evidenciaPath;
 
     // Getters y Setters
+
+
+    public String getEvidenciaPath() {
+        return evidenciaPath;
+    }
+
+    public void setEvidenciaPath(String evidenciaPath) {
+        this.evidenciaPath = evidenciaPath;
+    }
+
     public String getBasePath() {
         return basePath;
     }

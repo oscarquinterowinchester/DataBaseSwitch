@@ -117,8 +117,6 @@ public class CargaDieselService implements ICargaDieselService {
             
             String rutaRelativa = imageProps.getFotoSelloPath() +  nombreImg;
             
-            System.out.println("PATH: " + imageProps.getFotoSelloPath() + " FOTO: " + imageProps.getImageExtension());
-
             String rutaAbsoluta = utils.saveBase64Image(fotoSelloB64, rutaRelativa);
 
             carga.setFotoSello(rutaAbsoluta); 
