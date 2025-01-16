@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appchoferes.nomina.modules.itinerario.modules.evidencia.DTO.EvidenciasSubidasDTO;
 import com.appchoferes.nomina.modules.itinerario.modules.evidencia.DTO.TipoEvidenciaDTO;
 import com.appchoferes.nomina.modules.itinerario.modules.evidencia.requests.DTO.EvidenciasDTO;
+import com.appchoferes.nomina.modules.itinerario.modules.evidencia.services.DocumentosRequeridosService;
 import com.appchoferes.nomina.modules.itinerario.modules.evidencia.services.EvidenciasService;
 import com.appchoferes.nomina.modules.itinerario.modules.inspeccion.services.ListaInspeccionChoferService;
 
@@ -26,6 +28,9 @@ public class EvidenciaController {
 
     @Autowired
     EvidenciasService evidenciasService;
+
+    @Autowired
+    DocumentosRequeridosService  docsRequeridosRepo;
 
 @PostMapping("/setEvidencia")
     public ResponseEntity<?> setEvidencia(@RequestBody EvidenciasDTO evidenciasDTO,
@@ -43,5 +48,15 @@ public ResponseEntity<?> getTipoEvidencias(@RequestParam String dbType){
 
     return ResponseEntity.ok(lista);
 }
+
+@GetMapping("/getEvidenciaObligatoria")
+public ResponseEntity<?> getEvidenciaObligatoria(@RequestParam String dbType, @RequestParam int itinerarioId){
+
+    EvidenciasSubidasDTO evidenciasObligatorias = docsRequeridosRepo.getDocumentosRequeridosyEvidencias(dbType,itinerarioId);
+
+    return ResponseEntity.ok(evidenciasObligatorias);
+}
+
+//getDocumentosRequeridosyEvidencias
 
 }

@@ -2,7 +2,6 @@ package com.appchoferes.nomina.modules.itinerario.modules.evidencia.models;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

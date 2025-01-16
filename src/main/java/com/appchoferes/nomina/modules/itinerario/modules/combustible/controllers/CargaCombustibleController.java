@@ -51,7 +51,8 @@ public class CargaCombustibleController {
     }
 
     @GetMapping("/historialItinerarios")
-    public ResponseEntity<?> getItinerariosHistorial(@RequestParam int camionId,@RequestParam  String fechaActual,@RequestParam String dbType) {
+    public ResponseEntity<?> getItinerariosHistorial(@RequestParam int camionId,
+    @RequestParam  String fechaActual,@RequestParam String dbType) {
 
         List<ItinerariosHistorialDTO> historial = historialItiservice.getItinerariosHistorial(camionId, fechaActual, dbType);
 

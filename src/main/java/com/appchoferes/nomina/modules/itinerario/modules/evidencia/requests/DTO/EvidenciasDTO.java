@@ -1,7 +1,6 @@
 package com.appchoferes.nomina.modules.itinerario.modules.evidencia.requests.DTO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
