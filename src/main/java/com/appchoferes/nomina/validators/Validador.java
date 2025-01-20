@@ -82,6 +82,20 @@ public class Validador {
             print("Error al formatear la fecha: " + e);
         }
         return valorDate;
+    
+    }
+
+    public int toInt(Object valorObjeto){
+        if(objetoNoEsValido(valorObjeto)){
+            return 0;
+        }
+        int valorInteger = 0;
+        try{
+            valorInteger = Integer.parseInt(valorObjeto.toString());
+        }catch(NumberFormatException e){
+            return 0;
+        }
+        return valorInteger;
     }
 
     public static int validarInteger(Object valorObjeto){
@@ -147,6 +161,20 @@ public class Validador {
             return true;
         }
         return false;
+    } 
+
+    public boolean esObjetoValido(Object valorObjeto){
+        try{
+        if(valorObjeto == null){
+            return false;
+        }
+        if(valorObjeto.toString().isEmpty()){
+            return false;
+        }
+        }catch(NullPointerException e){
+            return false;
+        }
+        return true;
     } 
 
     public static boolean objetoEsValido(Object valorObjeto){

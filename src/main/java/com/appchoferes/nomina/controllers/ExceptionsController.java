@@ -3,10 +3,13 @@ package com.appchoferes.nomina.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -52,6 +55,40 @@ public class ExceptionsController {
         // Extraer el mensaje directamente de la excepción
         String errorMessage = ex.getMessage();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+
     }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> httpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        // Extraer el mensaje directamente de la excepción
+        String errorMessage = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<String> missingServletRequestParameterException(MissingServletRequestParameterException ex) {
+        // Extraer el mensaje directamente de la excepción
+        String errorMessage = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+
+    }
+
+    @ExceptionHandler(InvalidDataAccessResourceUsageException.class)
+    public ResponseEntity<String> invalidDataAccessResourceUsageException(InvalidDataAccessResourceUsageException ex) {
+        // Extraer el mensaje directamente de la excepción
+        String errorMessage = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+
+    }
+
+    
+
+
+    
+
+
+
+    
     
 }

@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.File;
 import java.util.Base64;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.appchoferes.nomina.config.DatabaseContextHolder;
@@ -37,7 +35,8 @@ public void establecerBaseDatos(String baseDatos)
 
     }
 
-    public static String toStr(int valor){
+    public static String toStr(int valor)
+    {
 
         String str = "";
 
@@ -121,8 +120,10 @@ public void establecerBaseDatos(String baseDatos)
     //     return "";
     // }
         // Retorna la ruta relativa o absoluta
-        return file.getAbsolutePath();
-    }
 
+        String relativePath = fileName;
+    
+        return relativePath;
+    }
     
 }

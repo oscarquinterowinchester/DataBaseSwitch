@@ -10,7 +10,6 @@ import com.appchoferes.nomina.modules.itinerario.modules.sello.models.SelloEntit
 @Repository
 public interface SelloRepository extends CrudRepository<SelloEntity,Long>{
 
-
     public SelloEntity getSelloEntityBySelloId(Long selloID);
 
     @Query(value = "CALL SELLO_cargarSellosByItinerarioId(:itinerarioId);", nativeQuery = true)
@@ -18,6 +17,9 @@ public interface SelloRepository extends CrudRepository<SelloEntity,Long>{
 
     @Query(value = "SELECT SELLO_getClienteSelloByItinearioId(:itinerarioId);", nativeQuery = true)
     public int getClienteSelloByItinearioId(int itinerarioId);
+
+    @Query(value = "CALL SELLO_romperSelloBySelloId(:selloId);", nativeQuery = true)
+    public int romperSello(int selloId);
 
 
 }
