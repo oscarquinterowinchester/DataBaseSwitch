@@ -16,6 +16,8 @@ public class FileStorageProperties {
     private String fotoFirmaPath;
     private String evidenciaPath;
     private String selloPath;
+    private String firmasPath;
+    private String extrasPath;
 
     // Getters y Setters
 
@@ -90,6 +92,22 @@ public class FileStorageProperties {
 
     public void setFotoFirmaPath(String fotoFirmaPath) {
         this.fotoFirmaPath = fotoFirmaPath;
+    }
+
+    public String getFirmasPath() {
+        return firmasPath;
+    }
+
+    public void setFirmasPath(String firmasPath) {
+        this.firmasPath = firmasPath;
+    }
+
+    public String getExtrasPath() {
+        return extrasPath;
+    }
+
+    public void setExtrasPath(String extrasPath) {
+        this.extrasPath = extrasPath;
     }
 
 }

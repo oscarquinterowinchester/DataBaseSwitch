@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.DTO.CategoriaDTO;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.DTO.ReporteMecanicoDTO;
+import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.DTO.TipoFallaDTO;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.DTO.UnidadReporteDTO;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.models.FallasMantenimientoEntity;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.models.RequisicionEntity;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.repositories.CategoriaRepository;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.repositories.FallasMantenimientoRepository;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.repositories.RequisicionRepository;
+import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.repositories.TipoFallaRepository;
 import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.repositories.UnidadReporteRepository;
 import com.appchoferes.nomina.operaciones.Utils;
 import com.appchoferes.nomina.validators.Validador;
@@ -40,6 +42,18 @@ public class ReporteMecanicoService {
 
     @Autowired
     UnidadReporteRepository unidadReporteRepository;
+
+    @Autowired
+    TipoFallaRepository tipoFallaRepository;
+
+
+    public List<TipoFallaDTO> getTipoFallasMecanicas(String dbType){
+
+        utils.establecerBaseDatos(dbType);
+
+       return tipoFallaRepository.getTiposFalla();
+
+    }
 
     public List<UnidadReporteDTO> getUnidadesObjeto(int itinerarioId, int categoriaId,String dbType){
 

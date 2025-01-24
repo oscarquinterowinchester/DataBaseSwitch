@@ -85,7 +85,8 @@ public class Validador {
     
     }
 
-    public int toInt(Object valorObjeto){
+
+    public static int validarInteger(Object valorObjeto){
         if(objetoNoEsValido(valorObjeto)){
             return 0;
         }
@@ -98,7 +99,7 @@ public class Validador {
         return valorInteger;
     }
 
-    public static int validarInteger(Object valorObjeto){
+    public  int toInt(Object valorObjeto){
         if(objetoNoEsValido(valorObjeto)){
             return 0;
         }
@@ -122,6 +123,32 @@ public class Validador {
             return 0.0;
         }
         return valorDouble;
+    }
+
+    public  Double toDouble(Object valorObjeto){
+        if(objetoNoEsValido(valorObjeto)){
+            return 0.0;
+        }
+        Double valorDouble = 0.0;
+        try{
+            valorDouble = Double.parseDouble(valorObjeto.toString());
+        }catch(NumberFormatException e){
+            return 0.0;
+        }
+        return valorDouble;
+    }
+
+    public  Float toFloat(Object valorObjeto){
+        if(objetoNoEsValido(valorObjeto)){
+            return 0F;
+        }
+        Float valorFloat = 0F;
+        try{
+            valorFloat = Float.parseFloat(valorObjeto.toString());
+        }catch(NumberFormatException e){
+            return 0F;
+        }
+        return valorFloat;
     }
 
     public static Boolean validarBoolean(String valorObjeto) {

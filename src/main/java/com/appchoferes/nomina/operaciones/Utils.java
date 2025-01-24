@@ -104,6 +104,8 @@ public void establecerBaseDatos(String baseDatos)
         // Define la ruta completa del archivo
          file = new File(imageProps.getBasePath() + fileName);
         
+         System.out.println("RUTA: "+imageProps.getBasePath() + fileName);
+
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }

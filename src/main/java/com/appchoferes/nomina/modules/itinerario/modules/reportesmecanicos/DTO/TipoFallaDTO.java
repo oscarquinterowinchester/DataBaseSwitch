@@ -1,6 +1,5 @@
 package com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.DTO;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -8,20 +7,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
-public class UnidadReporteDTO {
-
+public class TipoFallaDTO {
 
     @Id
-    @Column(name = "id")
     Long id;
 
-    @Column(name = "nombre")
     String nombre;
 
 }

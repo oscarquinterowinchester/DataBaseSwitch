@@ -2,6 +2,7 @@ package com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.cont
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.appchoferes.nomina.modules.itinerario.modules.reportesmecanicos.servi
 
 @RestController
 @RequestMapping("/api/drivermove/inspeccion")
+@CrossOrigin(origins = "http://localhost:4200")  
 public class ReporteMecanicoController {
 
     @Autowired
@@ -35,11 +37,18 @@ public class ReporteMecanicoController {
         return ResponseEntity.ok(reporteMecanicoService.getCategorias(dbType));
     }
 
+    @GetMapping("/getTipoFallas")
+    public ResponseEntity<?> getTipoFallas(@RequestParam String dbType){
+
+        return ResponseEntity.ok(reporteMecanicoService.getTipoFallasMecanicas(dbType));
+    }
+
     @GetMapping("/getUnidadesObjeto")
-    public ResponseEntity<?> getUnidadesObjeto(@RequestParam int itinerarioId, @RequestParam int categoriaId,
+    public ResponseEntity<?> getUnidadesObjeto(@RequestParam(name = "ItinerarioID")int itinerarioId, 
+    @RequestParam(name = "CategoriaID") int categoriaId,
     @RequestParam String dbType){
 
-        return ResponseEntity.ok(reporteMecanicoService.getCategorias(dbType));
+        return ResponseEntity.ok(reporteMecanicoService.getUnidadesObjeto(itinerarioId, categoriaId, dbType));
     }
 
 }
